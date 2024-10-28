@@ -1,2 +1,3 @@
-print("Hello world")
-print("One more addition +++")
+Sentece = "Something", "went", "wrong"
+for i in Sentece:
+    print(i)
