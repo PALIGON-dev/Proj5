@@ -64,3 +64,13 @@ class ShellEmulatorGUI:
         command = command[len(f"{self.username}@ShellEmulator:{self.current_dir}$ "):]
         self.run_command(command)
         return "break"
+
+    def cd(self, args):
+        # Переход в указанную директорию
+        if len(args) != 1:
+            return "cd: missing argument"
+        new_dir = args[0]
+        if new_dir in self.vfs:
+            self.current_dir = new_dir
+            return ""
+        return f"cd: no such file or directory: {new_dir}"
