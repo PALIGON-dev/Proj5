@@ -33,3 +33,22 @@ class ShellEmulatorGUI:
         prompt = f"{self.username}@ShellEmulator:{self.current_dir}$ "
         self.text.insert(END, prompt)
         self.text.see(END)
+
+    def ls(self, args):
+        # Если аргумент для директории не указан, выводим содержимое корневой директории
+        directory = "/" if not args else args[0]
+
+        # Проверяем, что указанная директория существует
+        if directory != "/" and directory not in self.vfs:
+            return f"ls: cannot access '{directory}': No such directory"
+
+        # Составляем список файлов и папок внутри указанной директории
+        files = []
+        for file_path in self.vfs.keys():
+            # Проверяем, находится ли файл в указанной директории
+            if file_path.startswith(directory):
+                # Убираем префикс директории и добавляем к списку
+                relative_path = file_path[len(directory):].strip("/")
+                files.append(relative_path)
+
+        return "\n".join(files) if files else "Empty directory"
