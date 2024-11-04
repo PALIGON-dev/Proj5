@@ -1,3 +1,5 @@
+import json
+import datetime
 import zipfile
 from tkinter import Tk, Text, END
 
@@ -74,3 +76,12 @@ class ShellEmulatorGUI:
             self.current_dir = new_dir
             return ""
         return f"cd: no such file or directory: {new_dir}"
+
+    def log_command(self, command):
+        entry = {
+            "timestamp": datetime.datetime.now().isoformat(),
+            "command": command
+        }
+        self.command_log.append(entry)
+        with open(self.log_path, "w") as f:
+            json.dump(self.command_log, f, indent=4)
