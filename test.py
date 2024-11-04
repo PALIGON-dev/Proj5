@@ -58,3 +58,9 @@ class ShellEmulatorGUI:
 
     def uname(self):
         return "ShellEmulator"
+
+    def execute_command(self, event):
+        command = self.text.get("end-2c linestart", "end-1c").strip()
+        command = command[len(f"{self.username}@ShellEmulator:{self.current_dir}$ "):]
+        self.run_command(command)
+        return "break"
