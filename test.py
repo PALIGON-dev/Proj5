@@ -52,3 +52,9 @@ class ShellEmulatorGUI:
                 files.append(relative_path)
 
         return "\n".join(files) if files else "Empty directory"
+
+    def echo(self, args):
+        return " ".join(args)
+
+    def uname(self):
+        return "ShellEmulator"
