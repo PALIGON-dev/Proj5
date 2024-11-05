@@ -1,6 +1,7 @@
 import json
 import datetime
 import zipfile
+import sys
 from tkinter import Tk, Text, END
 
 class ShellEmulatorGUI:
@@ -23,6 +24,37 @@ class ShellEmulatorGUI:
         if startup_script:
             self.execute_startup_script(startup_script)
 
+    def run_command(self, command):
+        # Разбиваем команду на основную часть и аргументы
+        parts = command.split()
+        if not parts:
+            return
+
+        cmd = parts[0]
+        args = parts[1:]
+
+        # Проверяем, какая команда введена
+        if cmd == "ls":
+            output = self.ls(args)
+        elif cmd == "cd":
+            output = self.cd(args)
+        elif cmd == "exit":
+            self.root.quit()
+            return
+        elif cmd == "echo":
+            output = self.echo(args)
+        elif cmd == "cp":
+            output = self.cp(args)
+        elif cmd == "uname":
+            output = self.uname()
+        else:
+            output = f"Unknown command: {cmd}"
+
+        # Записываем результат выполнения команды в GUI и логируем
+        self.text.insert(END, '\n' + output + '\n')  # Добавляем пустую строку для новой строки после команды
+        self.log_command(command)
+        self.insert_prompt()
+
     def load_vfs(self, vfs_path):
         vfs = {}
         with zipfile.ZipFile(vfs_path, 'r') as zip_ref:
@@ -37,19 +69,12 @@ class ShellEmulatorGUI:
         self.text.see(END)
 
     def ls(self, args):
-        # Если аргумент для директории не указан, выводим содержимое корневой директории
         directory = "/" if not args else args[0]
-
-        # Проверяем, что указанная директория существует
         if directory != "/" and directory not in self.vfs:
             return f"ls: cannot access '{directory}': No such directory"
-
-        # Составляем список файлов и папок внутри указанной директории
         files = []
         for file_path in self.vfs.keys():
-            # Проверяем, находится ли файл в указанной директории
             if file_path.startswith(directory):
-                # Убираем префикс директории и добавляем к списку
                 relative_path = file_path[len(directory):].strip("/")
                 files.append(relative_path)
 
@@ -68,7 +93,6 @@ class ShellEmulatorGUI:
         return "break"
 
     def cd(self, args):
-        # Переход в указанную директорию
         if len(args) != 1:
             return "cd: missing argument"
         new_dir = args[0]
@@ -85,3 +109,27 @@ class ShellEmulatorGUI:
         self.command_log.append(entry)
         with open(self.log_path, "w") as f:
             json.dump(self.command_log, f, indent=4)
+
+    def execute_startup_script(self, script_path):
+        # Выполняем команды из стартового скрипта
+        with open(script_path, "r") as f:
+            commands = f.readlines()
+            for command in commands:
+                self.run_command(command.strip())
+
+def main():
+    if len(sys.argv) < 3:
+        print("Usage: emulator.py <vfs_path> <log_path> [<startup_script>] [<username>]")
+        sys.exit(1)
+
+    vfs_path = sys.argv[1]
+    log_path = sys.argv[2]
+    startup_script = sys.argv[3] if len(sys.argv) > 3 else None
+    username = sys.argv[4] if len(sys.argv) > 4 else "user"
+
+    emulator = ShellEmulatorGUI(vfs_path, log_path, startup_script, username)
+    emulator.root.mainloop()
+
+
+if __name__ == "__main__":
+    main()
