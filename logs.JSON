@@ -1,0 +1,26 @@
+[
+    {
+        "timestamp": "2024-11-11T14:22:31.402047",
+        "command": "ls"
+    },
+    {
+        "timestamp": "2024-11-11T14:22:34.305596",
+        "command": "cd Folder"
+    },
+    {
+        "timestamp": "2024-11-11T14:22:35.624335",
+        "command": "ls"
+    },
+    {
+        "timestamp": "2024-11-11T14:22:43.041239",
+        "command": ";"
+    },
+    {
+        "timestamp": "2024-11-11T14:22:51.149787",
+        "command": "ls Folder/"
+    },
+    {
+        "timestamp": "2024-11-11T14:23:17.206403",
+        "command": "ls Folder/NotEmpty"
+    }
+]
