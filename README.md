@@ -38,8 +38,6 @@ Tkinter
 
 ![image](https://github.com/user-attachments/assets/8c4b326f-8ef3-48b8-88b4-99fd0ff3ddf9)
 
-![image](https://github.com/user-attachments/assets/8142d634-ba0e-4349-b0a7-ab80c525a735)
-
 ![image](https://github.com/user-attachments/assets/54e7e583-5fe2-4155-a801-9248c8de3c05)
 
 ![image](https://github.com/user-attachments/assets/30ea0a59-2a89-46c2-be4b-bec2f6eee292)
