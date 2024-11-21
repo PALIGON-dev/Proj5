@@ -18,7 +18,7 @@ zip. Эмулятор должен работать в режиме GUI.
 следующие команды:
 1. echo.
 2. cp.
-3. uname.
+3. uname.  
 Все функции эмулятора должны быть покрыты тестами, а для каждой из
 поддерживаемых команд необходимо написать 2 теста.
 --------------------------------------------------------------------------------
@@ -55,4 +55,4 @@ zip. Эмулятор должен работать в режиме GUI.
 
 ![image](https://github.com/user-attachments/assets/58d21adc-b8f4-4135-8bac-3c5eb3c48668)
 
-![image](https://github.com/user-attachments/assets/dcbc692b-86f6-44cc-92d1-e963c7d44053)
+![image](https://github.com/user-attachments/assets/0c9c8409-80d6-42fd-b355-04a6bc081756)
