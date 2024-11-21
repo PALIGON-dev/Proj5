@@ -55,3 +55,4 @@ zip. Эмулятор должен работать в режиме GUI.
 
 ![image](https://github.com/user-attachments/assets/58d21adc-b8f4-4135-8bac-3c5eb3c48668)
 
+![image](https://github.com/user-attachments/assets/dcbc692b-86f6-44cc-92d1-e963c7d44053)
